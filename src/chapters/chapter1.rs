@@ -25,15 +25,43 @@ impl Add<Meters> for Centimeter {
     }
 }
 
+ struct Pikapi<T> {
+    Pichu:T,
+    Pikachu:T,
+    Raichu:T
+}
+
+trait Max<T> {
+    fn max(&self) -> T;
+}
+
+impl <T> Max<T> for Pikapi<T> where T:Copy+PartialOrd {
+    fn max(&self) -> T {
+        if self.Pichu >= self.Pikachu&&self.Pichu >= self.Raichu{
+            self.Pichu
+        }
+        else if self.Pikachu >= self.Raichu {
+            self.Pikachu
+        }
+        else {
+            self.Raichu
+        }
+    }
+}
+
+
+
 pub fn generics() {
     let m1 = Meters(30.0);
     let c1 = Centimeter(39.9);
     println!("Sum in Meters {} m", (m1 + c1).0);
     println!("Sum in Centimeter {} cm", (c1 + m1).0);
-    let list = vec![1, 2, 3, 4, 5];
-    let list1 = vec![1.2, 32.23, 32.3, 32.3];
-    println!("{}", long(list));
-    println!("{}", long(list1));
+    let PikaPoke = Pikapi{
+        Pichu:10,
+        Pikachu:20,
+        Raichu:30
+    };
+    println!("Highes xp Pokemon is {}",PikaPoke.max());
 }
 
 fn long<T>(x: Vec<T>) -> T
