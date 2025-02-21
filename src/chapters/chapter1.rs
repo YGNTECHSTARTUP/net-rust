@@ -7,8 +7,29 @@ pub fn borrowing() {
     let y = &mut s;
     print!("{y}")
 }
+#[derive(Debug, Clone, Copy)]
+struct Meters(f64);
+#[derive(Debug, Clone, Copy)]
+struct Centimeter(f64);
+impl Add<Centimeter> for Meters {
+    type Output = Meters;
+    fn add(self, rhs: Centimeter) -> Self::Output {
+        Meters(self.0 + (rhs.0 / 100.0))
+    }
+}
+
+impl Add<Meters> for Centimeter {
+    type Output = Centimeter;
+    fn add(self, rhs: Meters) -> Self::Output {
+        Centimeter(self.0 + (rhs.0 * 100.0))
+    }
+}
 
 pub fn generics() {
+    let m1 = Meters(30.0);
+    let c1 = Centimeter(39.9);
+    println!("Sum in Meters {} m", (m1 + c1).0);
+    println!("Sum in Centimeter {} cm", (c1 + m1).0);
     let list = vec![1, 2, 3, 4, 5];
     let list1 = vec![1.2, 32.23, 32.3, 32.3];
     println!("{}", long(list));
@@ -26,6 +47,84 @@ where
     sum
 }
 
+// pub fn lifetime() {
+//     let v1 = vec![1, 2, 3, 4, 5];
+//     let v2 = vec![1, 2];
+//     println!("{:?}", longer_vector(&v1, &v2));
+// }
+
+// fn longer_vector(x: &[i32], y: &[i32]) -> &[i32] {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+// pub fn lifetime() {
+//     let v1 = vec![1, 2, 3, 4, 5];
+//     let v2 = vec![1, 2];
+//     println!("{:?}", longer_vector(&v1, &v2));
+// }
+
+// fn longer_vector(x: &[i32], y: &[i32]) -> &[i32] {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+// pub fn lifetime() {
+//     let v1 = vec![1, 2, 3, 4, 5];
+//     let v2 = vec![1, 2];
+//     println!("{:?}", longer_vector(&v1, &v2));
+// }
+
+// fn longer_vector(x: &[i32], y: &[i32]) -> &[i32] {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+// pub fn lifetime() {
+//     let v1 = vec![1, 2, 3, 4, 5];
+//     let v2 = vec![1, 2];
+//     println!("{:?}", longer_vector(&v1, &v2));
+// }
+
+// fn longer_vector(x: &[i32], y: &[i32]) -> &[i32] {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+// pub fn lifetime() {
+//     let v1 = vec![1, 2, 3, 4, 5];
+//     let v2 = vec![1, 2];
+//     println!("{:?}", longer_vector(&v1, &v2));
+// }
+
+// fn longer_vector(x: &[i32], y: &[i32]) -> &[i32] {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+// pub fn lifetime() {
+//     let v1 = vec![1, 2, 3, 4, 5];
+//     let v2 = vec![1, 2];
+//     println!("{:?}", longer_vector(&v1, &v2));
+// }
+
+// fn longer_vector(x: &[i32], y: &[i32]) -> &[i32] {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
 // pub fn lifetime() {
 //     let v1 = vec![1, 2, 3, 4, 5];
 //     let v2 = vec![1, 2];
